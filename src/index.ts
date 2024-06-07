@@ -1,10 +1,10 @@
-// src/index.ts
-import * as fs from 'fs';
+import { streamReadFile, streamWriteFile } from './modules/fs/streamFs';
 
-fs.writeFile('test.txt', 'Hello, world!', (err: NodeJS.ErrnoException | null) => {
-    if (err) {
-        console.error('Error writing file:', err);
-        return;
-    }
-    console.log('File written successfully');
-});
+const filePath = 'test.txt';
+const data = 'This is a sample content for streaming write operation.';
+
+// Stream write to file
+streamWriteFile(filePath, data);
+
+// Stream read from file
+streamReadFile(filePath);
