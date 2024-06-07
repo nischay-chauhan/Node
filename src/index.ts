@@ -1,10 +1,19 @@
 import { streamReadFile, streamWriteFile } from './modules/fs/streamFs';
+import * as readline from 'readline';
 
-const filePath = 'test.txt';
-const data = 'This is a sample content for streaming write operation.';
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// Stream write to file
-streamWriteFile(filePath, data);
+const filePath = 'example.txt';
 
-// Stream read from file
-streamReadFile(filePath);
+rl.question('Enter the content to write to the file: ', (input) => {
+    streamWriteFile(filePath, input);
+    rl.close();
+});
+
+rl.on('close', () => {
+    console.log('Reading file content...');
+    streamReadFile(filePath);
+});

@@ -1,19 +1,28 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as readline from 'readline';
 
 export const streamReadFile = (filePath: string): void => {
     const absolutePath = path.resolve(filePath);
     const readStream = fs.createReadStream(absolutePath, { encoding: 'utf-8' });
-
-    readStream.on('data', (chunk) => {
-        console.log('Received chunk:', chunk);
+    const rl = readline.createInterface({
+        input: readStream,
+        output: process.stdout,
+        terminal: false
     });
 
-    readStream.on('end', () => {
+    rl.on('line', (line) => {
+        const words = line.split(/\s+/);
+        words.forEach(word => {
+            console.log('Read word:', word);
+        });
+    });
+
+    rl.on('close', () => {
         console.log('Finished reading file.');
     });
 
-    readStream.on('error', (error) => {
+    rl.on('error', (error) => {
         console.error('Error reading file:', error);
     });
 };
@@ -27,6 +36,7 @@ export const streamWriteFile = (filePath: string, data: string): void => {
 
     writeStream.on('finish', () => {
         console.log('Finished writing to file.');
+        streamReadFile(filePath);
     });
 
     writeStream.on('error', (error) => {
