@@ -6,7 +6,9 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'tsc && node dist/index.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "tsc && node --test dist/tests/**/*.test.js",
+    "test:watch": "nodemon --watch 'src/**/*.ts' --watch 'tests/**/*.ts' --exec 'tsc && node --test dist/tests/**/*.test.js'"
   },
   "keywords": [],
   "author": "",
