@@ -43,13 +43,42 @@ npm run test:watch
 src/
   modules/
     buffer/
+      buff.ts
     child_process/
+      cp.ts
+    crypto/
+      hash.ts
+      cipher.ts
+      index.ts
     fs/
       streamFs.ts
+    http/
+      server.ts
+      client.ts
+      index.ts
+    stream/
+      transforms.ts
+      index.ts
+    zlib/
+      compress.ts
+      index.ts
 
 tests/
+  buffer/
+    buff.test.ts
+  child_process/
+    cp.test.ts
+  crypto/
+    hash.test.ts
+    cipher.test.ts
   fs/
     streamFs.test.ts
+  http/
+    server.test.ts
+  stream/
+    transforms.test.ts
+  zlib/
+    compress.test.ts
 
 dist/                # build output (generated)
 ```
